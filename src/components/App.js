@@ -1,5 +1,6 @@
 import React from 'react';
 import UserCreate from './UserCreate';
+import LanguageContext from '../contexts/LanguageContext';
 
 class App extends React.Component{
 
@@ -23,7 +24,10 @@ class App extends React.Component{
             onClick={() => this.onLanguageChange('dutch')} 
           />
         </div>
+        <LanguageContext.Provider value={this.state.language}>
+          {/* the "value" prop name is special to the Provider */}
           <UserCreate />
+        </LanguageContext.Provider>
       </div>
     );
   }
