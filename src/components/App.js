@@ -1,36 +1,54 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import UserCreate from './UserCreate';
-import LanguageContext from '../contexts/LanguageContext';
+import Icons from './Icons';
+import { GlobalProvider} from '../contexts/GlobalState';
 
-class App extends React.Component{
+//refactored into hooks
 
-  state={ language: "english" };
+const App = () => {
 
-  onLanguageChange = (language) => {
-    this.setState({ language}); //object shorthand
-  };
+  
 
-  render(){
-    return (
+  return(
+    <GlobalProvider>
       <div className="ui container">
-        <div>
-          Select a language:
-          <i 
-            className="flag us" 
-            onClick={()=>this.onLanguageChange('english')}
-          />
-          <i 
-            className="flag nl" 
-            onClick={() => this.onLanguageChange('dutch')} 
-          />
+            <Icons />
+            {/* the "value" prop name is special to the Provider */}
+            <UserCreate />
         </div>
-        <LanguageContext.Provider value={this.state.language}>
-          {/* the "value" prop name is special to the Provider */}
-          <UserCreate />
-        </LanguageContext.Provider>
-      </div>
-    );
-  }
+      </GlobalProvider>
+  )
 }
+
+// class App extends React.Component{
+
+//   state={ language: "english" };
+
+//   onLanguageChange = (language) => {
+//     this.setState({ language}); //object shorthand
+//   };
+
+//   render(){
+//     return (
+//       <div className="ui container">
+//         <div>
+//           Select a language:
+//           <i 
+//             className="flag us" 
+//             onClick={()=>this.onLanguageChange('english')}
+//           />
+//           <i 
+//             className="flag nl" 
+//             onClick={() => this.onLanguageChange('dutch')} 
+//           />
+//         </div>
+//         <LanguageContext.Provider value={this.state.language}>
+//           {/* the "value" prop name is special to the Provider */}
+//           <UserCreate />
+//         </LanguageContext.Provider>
+//       </div>
+//     );
+//   }
+// }
 
 export default App;
